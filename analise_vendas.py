@@ -1,4 +1,5 @@
 import sys
+
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -9,8 +10,11 @@ except FileNotFoundError:
     print("\n❌ Erro: O arquivo 'vendas_ficticias.xlsx' não foi encontrado!")
     print("👉 Solução: Execute o script 'gerar_vendas.py' primeiro.\n")
     sys.exit(1)
-except Exception as e:
-    print(f"\n❌ Erro inesperado ao abrir o arquivo: {e}\n")
+except pd.errors.EmptyDataError:
+    print("\n❌ Erro: O arquivo 'vendas_ficticias.xlsx' está vazio.\n")
+    sys.exit(1)
+except OSError as e:
+    print(f"\n❌ Erro de Leitura/Acesso ao arquivo: {e}\n")
     sys.exit(1)
 
 # 2. Processamento e Novas Colunas
